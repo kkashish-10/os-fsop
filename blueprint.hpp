@@ -18,14 +18,7 @@
  *
  */
 
-/**
- * @brief opening a file
- *
- * initStat(filename)
- * if _fileStats.nlink_t not_eq 0 then open and return fd
- * else file does not exist ask user to create
- * 
- */
+
 
 /*
     if only one or two argument(s) print readme file

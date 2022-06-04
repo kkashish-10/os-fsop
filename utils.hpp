@@ -47,8 +47,7 @@ namespace utils
             }
             else if (strcmp(_args->_action, "-rd") == 0)
             {
-                _args->_permissions = "-rd";
-                // rfo::initiateRead(rfo::initiateOpen(_args->_fname))
+                _nbytesread=rfo::initiateRead(_args->_fname,)
             }
         }
 

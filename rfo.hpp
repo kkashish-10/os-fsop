@@ -107,10 +107,13 @@ namespace rfo
         return _fd;
     }
 
-    ssize_t initiateRead()
-    {
-        ssize_t read(_fd,_buffer,_nbytes);
-            return 1;
-    }
+    // ssize_t initiateRead(const char* _file,)
+    // {
+    //     //for reading we need to open the file and that requires initatestat to check if the file exists
+    //     int _fd=initiateOpen(_file,O_RDONLY);
+    //     // if(_fd==-1)
+    //     // read(_fd,_buffer,_nbytes);
+            
+    // }
 }
 #endif //_RFO_HPP_
