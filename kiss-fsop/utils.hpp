@@ -48,6 +48,7 @@ namespace utils
     void displayStats(struct stat _fileStats)
     {
         std::cout << "\n-----File information-----";
+        std::cout << "\nFile st_ino : " << _fileStats.st_ino;
         std::cout << "\nFile st_uid : " << _fileStats.st_uid;
         std::cout << "\nFile st_gid : " << _fileStats.st_gid;
         std::cout << "\nFile st_blksize : " << _fileStats.st_blksize;
@@ -90,21 +91,19 @@ namespace utils
             _mode |= S_IWUSR;
         if (_perm[2] == 'x')
             _mode |= S_IXUSR;
-        // _mode = _mode << 3;
         if (_perm[3] == 'r')
             _mode |= S_IRGRP;
         if (_perm[4] == 'w')
             _mode |= S_IWGRP;
         if (_perm[5] == 'x')
             _mode |= S_IXGRP;
-        // _mode = _mode << 3;
         if (_perm[6] == 'r')
             _mode |= S_IROTH;
         if (_perm[7] == 'w')
             _mode |= S_IWOTH;
         if (_perm[8] == 'x')
             _mode |= S_IXOTH;
-            std::cout<<"\n mode "<<std::oct<<_mode<<" \n";
+        std::cout << "\n mode " << std::oct << _mode << " \n";
         return _mode;
     }
 } // namespace utils

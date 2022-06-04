@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     if (_perm[3] == 'r')
         _mode |= (0400 >> 3);
     if (_perm[4] == 'w')
-        _mode |= (0200 >> 3);
+        _mode |= S_IWGRP;
     if (_perm[5] == 'x')
         _mode |= (0100 >> 3);
     // _mode = _mode << 3;
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     if (_perm[8] == 'x')
         _mode |= ((0100 >> 3) >> 3);
     std::cout << std::oct << _mode;
-    std::cout << (S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IXGRP | S_IROTH | S_IWOTH | S_IXOTH);
-    creat("/home/ddos/Desktop/xyza.txt",(mode_t)_mode);
+    // std::cout << );
+    creat("/home/ddos/Desktop/xyza.txt", S_IROTH ^ S_IWOTH ^ S_IXOTH);
     return 1;
 }
