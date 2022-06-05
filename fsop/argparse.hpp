@@ -11,6 +11,7 @@
 
 #pragma once
 #include <string>
+#include <iostream>
 
 #ifndef _ARGPARSE_HPP_
 #define _ARGPARSE_HPP_
