@@ -2,6 +2,15 @@
 
 command line based program for demonstration of filesystem system calls.
 
+# Building
+
+- # Prerequisites
+
+  - GNU c++ compiler(g++) version 9.0 or newer with support for c++20
+
+- # Compilation
+  g++ -o fsop ../fsop/main.cpp
+
 # Execution & Usage
 
 - For execution, use either the executable file provided with the program or compile one for your target system.
@@ -24,3 +33,32 @@ command line based program for demonstration of filesystem system calls.
   ./fsop [-write] [-np/rf] [..filename.extension] [optional_offset]
 
   ```
+
+# System Call(s) used
+
+| Task | System call(s) used |
+| Create new file/pipe | `creat` , `mknod` |
+| Access existing file/pipe | `open` ,`read`, `write`, `lseek`, `close`,`stat`|
+| Advanced system calls| `pipe`|
+
+# Examples
+
+- Create a new regular file, named as `file.txt` (blank file) with read, write and execute permissions for user and read and write permissions for group and others:
+
+```bash
+    ./fsop -create -rf file.txt rdxrw-rw-
+```
+
+- Open a named pipe, named as `mypipe` for reading:
+
+```bash
+    ./fsop -read -np mypipe
+```
+
+# About
+
+- Created by : Kashish (kd372744@gmail.com)
+
+# Reference
+
+- [The Design of Unix Operating System, Maurice J.Bach](https://www.pdfdrive.com/the-design-of-the-unix-operating-system-maurice-bach-e25830714.html)

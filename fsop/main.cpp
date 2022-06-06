@@ -21,7 +21,7 @@ int main(const int argc, const char **argv)
     srand(time(0));
     if (argc <= 2)
     {
-        system("cat ../README.md");
+        system("cat ../help.txt");
         return -1;
     }
     argparse::arguments *_args = new argparse::arguments(argc, argv);

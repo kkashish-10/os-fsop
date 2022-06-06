@@ -117,7 +117,7 @@ namespace command
                     return EXIT_FAILURE;
                 }
                 auto _rvalue = npipe::initiateCreate(_args->_fname);
-                std::cout << (_rvalue == EXIT_SUCCESS ? "Successfully created pipe !" : "Error creating pipe !");
+                std::cout << (_rvalue == EXIT_SUCCESS ? "" : "\nError creating pipe !");
                 return _rvalue;
             }
             else if (strcmp(_args->_action, "-read") == 0)
