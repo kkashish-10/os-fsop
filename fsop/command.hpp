@@ -111,6 +111,11 @@ namespace command
         {
             if (strcmp(_args->_action, "-create") == 0)
             {
+                if (strcmp(_args->_fname, "") == 0)
+                {
+                    std::cout << "\nError creating named pipe ! Pipe name not given !";
+                    return EXIT_FAILURE;
+                }
                 auto _rvalue = npipe::initiateCreate(_args->_fname);
                 std::cout << (_rvalue == EXIT_SUCCESS ? "Successfully created pipe !" : "Error creating pipe !");
                 return _rvalue;
@@ -138,33 +143,37 @@ namespace command
                 }
             }
         }
-        else if (strcmp(_args->_ftype, "-unp") == 0)
+        else
+        {
+            std::cout << "\nCommand not found !\n./fsop  or -/fsop --help for usage !";
+            return EXIT_FAILURE;
+        }
+        return 0;
+    }
+
+    auto process_unp(argparse::arguments *_args)
+    {
+        if (strcmp(_args->_ftype, "-unp") == 0)
         {
             int _fd[2];
             if (strcmp(_args->_action, "-create") == 0)
             {
                 auto _out = unpipe::initiateCreate(_fd);
-                return _out;
-            }
-            else if (strcmp(_args->_action, "-read") == 0)
-            {
-                auto _out = unpipe::initiateCreate(_fd);
-                char _buffer[1024];
+                char *_buffer;
+                auto _nbytes = -1;
                 while (true)
                 {
+                    _nbytes = fsop::initiateWrite(_fd[1], _buffer);
                     fsop::initiateRead(_fd[0], _buffer, 8);
                 }
-            }
-            else if (strcmp(_args->_action, "-write") == 0)
-            {
-                auto _out = unpipe::initiateCreate(_fd);
-                char _buffer[1024];
-                while (true)
-                {
-                    fsop::initiateWrite(_fd[1], _buffer);
-                }
+                return _out;
             }
         }
-        return 0;
+        else
+        {
+            std::cout << "\nCommand not found !\n./fsop  or -/fsop --help for usage !";
+            return EXIT_FAILURE;
+        }
+        return EXIT_SUCCESS;
     }
 } // namespace command
