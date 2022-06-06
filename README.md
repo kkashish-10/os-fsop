@@ -8,7 +8,7 @@ command line based program for demonstration of filesystem system calls.
 
 - # Usage
 ```bash
-./fsop -<action> -<filetype> -<filename> <oflag/mode/bytes_to_read> <offset(optional)>
+./fsop -[action] -[filetype] -[filename] [oflag/mode/bytes_to_read] [offset(optional)]
 
 
 
