@@ -1,7 +1,7 @@
 /**
  * @file utils.hpp
  * @author ddos_kas (kd372744@gmail.com)
- * @brief
+ * @brief utility function for preprocessing arguments passed through command line
  * @version 0.1
  * @date 2022-06-03
  *
@@ -20,6 +20,13 @@
 
 namespace utils
 {
+    /**
+     * @brief function to check validity of filetype passed through command line
+     *
+     * @param _ftype filetype
+     * @return true
+     * @return false
+     */
     bool isValidFileType(const char *_ftype)
     {
         if (validator::_filetype.find(_ftype) not_eq validator::_filetype.end()) // O(log n)
@@ -27,6 +34,13 @@ namespace utils
         return false;                                                            // invalid filetype
     }
 
+    /**
+     * @brief function to check validity of action passed through command line
+     *
+     * @param _action action
+     * @return true
+     * @return false
+     */
     bool isValidAction(const char *_action)
     {
         if (validator::_action.find(_action) not_eq validator::_action.end())
@@ -34,16 +48,16 @@ namespace utils
         return false;
     }
 
-    bool isValidPermission(const char *_permission)
-    {
-        if (validator::_permissions.find(_permission) not_eq validator::_permissions.end())
-            return true;
-        return false;
-    }
+    // bool isValidPermission(const char *_permission)
+    // {
+    //     if (validator::_permissions.find(_permission) not_eq validator::_permissions.end())
+    //         return true;
+    //     return false;
+    // }
     /**
-     * @brief function to display file information
+     * @brief function to display file information fetched through fsop::initiateStat(...)
      *
-     * @param _fileStats
+     * @param _fileStats stats struct containing file information
      */
     void displayStats(struct stat _fileStats)
     {
@@ -72,7 +86,12 @@ namespace utils
         printf((_fileStats.st_mode & S_IXOTH) ? "x" : "-");
         return;
     }
-
+    /**
+     * @brief function to display buffer content
+     *
+     * @param _buffer buffer to display content from
+     * @param _nbytes count of bytes to de displayed
+     */
     void printBuffer(const char *_buffer, ssize_t _nbytes)
     {
         std::cout << "\nBuffer content :\n";
@@ -82,6 +101,12 @@ namespace utils
         return;
     }
 
+    /**
+     * @brief function to convert permissions string to mode_t type value
+     *
+     * @param _perm permissions string
+     * @return mode_t
+     */
     mode_t toMode(const char *_perm)
     {
         mode_t _mode = 0000;

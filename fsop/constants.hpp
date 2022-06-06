@@ -1,7 +1,7 @@
 /**
  * @file constants.hpp
  * @author ddos_kas (kd372744@gmail.com)
- * @brief
+ * @brief file with definition for constants for filetypes, actions, permissions and opening flags 
  * @version 0.1
  * @date 2022-06-03
  *
@@ -22,7 +22,7 @@ namespace validator
 {
     std::set<std::string> _filetype = {"-dir", "-rf", "-np", "-unp"};
     std::set<std::string> _action = {"-open", "-read", "-write", "-create", "-info"};
-    std::set<std::string> _permissions = {"-rd", "-wr", "rdwr"};
+    // std::set<std::string> _permissions = {"-rd", "-wr", "rdwr"};
 
 } // namespace validator
 

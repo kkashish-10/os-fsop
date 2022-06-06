@@ -1,7 +1,7 @@
 /**
  * @file fsop.hpp
  * @author ddos_kas (kd372744@gmail.com)
- * @brief
+ * @brief file with user defined functions for using various filesystem operations
  * @version 0.1
  * @date 2022-06-03
  *
@@ -24,8 +24,8 @@ namespace fsop
     /**
      * @brief function to get file stats
      *
-     * @param _file
-     * @return std::pair<int, struct stat>
+     * @param _file filename (path included)
+     * @return std::pair<int, struct stat>  <file_descriptor,stats of the file>
      */
     std::pair<int, struct stat> initiateStat(const char *_file)
     {
@@ -45,13 +45,13 @@ namespace fsop
     }
 
     /**
-     * @brief function to read from a file/pipe sequentially/randomly
+     * @brief function to read from a regular file(sequentially/randomly) and sequentailly from named pipes
      *
-     * @param _fd
-     * @param _buffer
-     * @param _offset
-     * @param _nbytes
-     * @return auto
+     * @param _fd file descriptor of the file to read in
+     * @param _buffer buffer to read in
+     * @param _offset offset position to read from(passed only for regular files)
+     * @param _nbytes count of bytes to be read
+     * @return auto count of bytes read
      */
     auto initiateRead(const int _fd, char *_buffer, const std::size_t _nbytes, off_t _offset = 0)
     {
@@ -74,6 +74,14 @@ namespace fsop
         return _nbytesread;
     }
 
+    /**
+     * @brief function to write to a regular file(sequentially/randomly) and sequentially to named pipes
+     *
+     * @param _fd file descriptor of the file to write to
+     * @param _buffer buffer to write from
+     * @param _offset offset position to start writing from (passed only for regular files)
+     * @return auto count of bytes written
+     */
     auto initiateWrite(const int _fd, char *_buffer, off_t _offset = 0)
     {
         auto _nbyteswr = -1;
@@ -97,6 +105,12 @@ namespace fsop
         return _nbyteswr;
     }
 
+    /**
+     * @brief function to close a file/pipe
+     *
+     * @param _fd file descriptor of the file to be closed
+     * @return auto
+     */
     auto initiateClose(const int _fd)
     {
         auto _out = -1;
@@ -117,6 +131,13 @@ namespace fsop
 
 namespace regfile
 {
+    /**
+     * @brief function to create a regular file
+     *
+     * @param _file filename (path included)
+     * @param _mode permissions to be given to user|group|others
+     * @return auto  file descriptor for write only if file created successfully else -1
+     */
     auto initiateCreate(const char *_file, mode_t _mode = 0744)
     {
         auto _fd = -1;
@@ -135,9 +156,9 @@ namespace regfile
     /**
      * @brief function to open a  file/pipe
      *
-     * @param _file
-     * @param _oflag
-     * @return auto
+     * @param _file filename (path included)
+     * @param _oflag opening flag
+     * @return auto file descriptor representing opening staus of file (-1 error,>2 if opened successfully)
      */
     auto initiateOpen(const char *_file, const char *_permissions)
     {
@@ -187,6 +208,12 @@ namespace regfile
 
 namespace npipe
 {
+    /**
+     * @brief function to create a named pipe
+     *
+     * @param _pipename pipename (path included)
+     * @return auto creation status
+     */
     auto initiateCreate(const char *_pipename)
     {
         auto _out = fsop::initiateStat(_pipename);
@@ -200,6 +227,13 @@ namespace npipe
         return EXIT_SUCCESS;
     }
 
+    /**
+     * @brief function to open a named pipe if exists for opening
+     *
+     * @param _pipename pipename(path included)
+     * @param _mode (opening mode)
+     * @return auto opening status
+     */
     auto initiateOpen(const char *_pipename, const int _mode)
     {
         int _fd = -1;
@@ -219,6 +253,12 @@ namespace npipe
 
 namespace unpipe
 {
+    /**
+     * @brief function to create an unnamed pipe 
+     * 
+     * @param _fd integer array of size 2 for setting reading and writing ends of pipe
+     * @return auto  creation status 
+     */
     auto initiateCreate(int *_fd)
     {
         auto _out = pipe(_fd);

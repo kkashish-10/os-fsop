@@ -1,7 +1,7 @@
 /**
  * @file argparse.hpp
  * @author ddos_kas (kd372744@gmail.com)
- * @brief
+ * @brief file with functions and structure related with arguments passed on command line
  * @version 0.1
  * @date 2022-06-03
  *
@@ -35,6 +35,11 @@ namespace argparse
         };
     };
 
+    /**
+     * @brief helper function to display parsed arguments
+     *
+     * @param _args  pointer to arguments struct with parsed arguments
+     */
     void displayArgs(arguments *_args)
     {
         std::cout << _args->_action << std::endl;
